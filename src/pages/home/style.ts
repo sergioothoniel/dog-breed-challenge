@@ -15,8 +15,17 @@ h1{
 }
 
 #selected{
-    width: 50vw;    
+    width: 50vw;
+    height: auto ;
     box-shadow: 10px 5px 5px black;
+    margin-right: 15px;
+
+    img{
+        max-width: 100%;
+        max-height: 100%;
+        
+        height: auto;
+    }
 }
 
 .breedSelector{

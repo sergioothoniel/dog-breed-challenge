@@ -7,13 +7,14 @@ figure{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 200px;    
-    margin: 5px 10px 5px 5px;
-    transition: 0.3s;
+    width: 200px;
+    height: 200px;
+    margin: 5px;
+    transition: 0.5s;
 }
 
 img{
     width: 100%;
-    max-height: 100%;
+    height: 100%;
 }
 `
