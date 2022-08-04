@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const HomeContainer = styled.div`
 
+padding: 0 10px;
+
 h1{
     font-size: xxx-large;
 }
@@ -15,8 +17,11 @@ h1{
 }
 
 #selected{
-    width: 50vw;    
+    width: 50vw;
+    height: 100vh ;
     box-shadow: 10px 5px 5px black;
+    position: relative;
+    z-index: 10;
 }
 
 .breedSelector{
@@ -33,6 +38,10 @@ h1{
     :disabled{
         background-color: #d9e8ff;
     }
+}
+
+.loadingIcon{
+    margin-top: 60px;
 }
 
 `

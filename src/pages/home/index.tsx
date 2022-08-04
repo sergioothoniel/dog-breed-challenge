@@ -1,7 +1,9 @@
-import { CircularProgress } from "@mui/material"
+import { CircularProgress, ImageList, ImageListItem } from "@mui/material"
 import { useEffect, useState} from "react"
 import { useHistory } from "react-router-dom"
 import Card from "../../components/card"
+import ModalImage from "../../components/modalImage"
+import ModalContainer from "../../components/modalImage"
 import { useDogs } from "../../providers/dogs"
 import { useIsLogged } from "../../providers/inLogged"
 import { HomeContainer } from "./style"
@@ -13,7 +15,7 @@ const Home  = () =>{
     const {setToken} = useIsLogged()
     const {listHandle, dogsList} = useDogs()
 
-    const [imageSelected, setImageSelected] = useState<HTMLElement>()
+    const [imageSelected, setImageSelected] = useState<string>('')
     const [buttonSelected, setButtonSelected] = useState<string>("chihuahua")
 
     useEffect(()=>{
@@ -31,21 +33,8 @@ const Home  = () =>{
         listHandle(breed)
     }
     
-    const handleClickImage = (event: any) =>{
-        if(imageSelected){
-            imageSelected!.id = ''
-        }  
-
-        const elementTarget = event.target.parentElement
-        console.log(elementTarget)
-
-        if(imageSelected !== elementTarget){
-            elementTarget.id = "selected"
-            setImageSelected(elementTarget)
-        }
-        else{
-            setImageSelected(undefined)
-        }                  
+    const handleClickImage = (imgURL: any) =>{
+        setImageSelected(imgURL)                      
     }
 
     return(
@@ -59,7 +48,30 @@ const Home  = () =>{
                 <button className="breedSelector" disabled={buttonSelected === "pug" ? true : false} onClick={() => handleClickButton("pug")}>Pug</button>
             </div>
 
-            <div className="cardsList">
+            
+            {dogsList[0] ?
+            (<ImageList  variant="masonry"  cols={8} rowHeight={200}>
+                {dogsList.map((item, index) => (
+                    <ImageListItem key={index}>
+                    <img
+                        src={`${item}?w=164&h=164&fit=crop&auto=format`}
+                        srcSet={`${item}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                        alt=''
+                        loading="lazy"
+                        onClick={() => handleClickImage(item)}
+                    />
+                    </ImageListItem>
+                ))}
+            </ImageList>)
+            :
+            (
+                <div className="loadingIcon"><CircularProgress/></div>
+            )
+            }
+
+            <ModalImage imgURL={imageSelected}/>
+
+            {/* <div className="cardsList">
                 {dogsList[0] ?                 
                 dogsList.map((image, index) =>(
                     <Card key={index} imgURL={image} onClick={handleClickImage}/>
@@ -67,7 +79,7 @@ const Home  = () =>{
                 :
                 <div className="loadingIcon"><CircularProgress/></div>
             }
-            </div>
+            </div> */}
         </HomeContainer>
     )
 }
