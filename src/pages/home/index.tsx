@@ -1,5 +1,5 @@
 import { CircularProgress } from "@mui/material"
-import { useEffect} from "react"
+import { useEffect, useState} from "react"
 import { useHistory } from "react-router-dom"
 import Card from "../../components/card"
 import { useDogs } from "../../providers/dogs"
@@ -11,7 +11,10 @@ const Home  = () =>{
     const history = useHistory()
 
     const {setToken} = useIsLogged()
-    const {breed, listHandle, dogsList} = useDogs()
+    const {listHandle, dogsList} = useDogs()
+
+    const [imageSelected, setImageSelected] = useState<HTMLElement>()
+    const [buttonSelected, setButtonSelected] = useState<string>("chihuahua")
 
     useEffect(()=>{
         const token = localStorage.getItem("@dogbreed/token")
@@ -20,28 +23,46 @@ const Home  = () =>{
         }
         else{
             setToken(JSON.parse(token).token)
-        }                
-        
+        }                     
     })  
+
+    const handleClickButton = (breed: string) =>{
+        setButtonSelected(breed)
+        listHandle(breed)
+    }
     
+    const handleClickImage = (event: any) =>{
+        if(imageSelected){
+            imageSelected!.id = ''
+        }  
+
+        const elementTarget = event.target.parentElement
+        console.log(elementTarget)
+
+        if(imageSelected !== elementTarget){
+            elementTarget.id = "selected"
+            setImageSelected(elementTarget)
+        }                  
+    }
+
     return(
         <HomeContainer>
             <h1>Select a Breed</h1>
 
             <div className="breedSelectors">
-                <button onClick={() => listHandle("chihuahua")}>Chihuahua</button>
-                <button onClick={() => listHandle("husky")}>Husky</button>
-                <button onClick={() => listHandle("labrador")}>Labrador</button>
-                <button onClick={() => listHandle("pug")}>Pug</button>
+                <button disabled={buttonSelected === "chihuahua" ? true : false} onClick={() => handleClickButton("chihuahua")}>Chihuahua</button>
+                <button disabled={buttonSelected === "husky" ? true : false}  onClick={() => handleClickButton("husky")}>Husky</button>
+                <button disabled={buttonSelected === "labrador" ? true : false} onClick={() => handleClickButton("labrador")}>Labrador</button>
+                <button disabled={buttonSelected === "pug" ? true : false} onClick={() => handleClickButton("pug")}>Pug</button>
             </div>
 
             <div className="cardsList">
                 {dogsList[0] ?                 
                 dogsList.map((image, index) =>(
-                    <Card key={index} imgURL={image}/>
+                    <Card key={index} imgURL={image} onClick={handleClickImage}/>
                 ))
                 :
-                <div className="loadingIcon"><CircularProgress /></div>
+                <div className="loadingIcon"><CircularProgress/></div>
             }
             </div>
         </HomeContainer>

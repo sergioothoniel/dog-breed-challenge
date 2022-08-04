@@ -10,4 +10,9 @@ export const HomeContainer = styled.div`
     margin-top: 65px;
 }
 
+#selected{
+    width: 50vw;    
+    box-shadow: 10px 5px 5px black;
+}
+
 `

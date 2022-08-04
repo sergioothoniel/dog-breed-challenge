@@ -1,13 +1,19 @@
+import { HTMLAttributes} from "react"
 import { FigureContainer } from "./style"
 
-interface CardProps{
-    imgURL: string
+interface CardProps extends HTMLAttributes<HTMLElement>{
+    imgURL: string,
+    selected?: boolean
 }
 
-const Card = ({imgURL}: CardProps) =>{
+
+const Card = ({imgURL, selected = false, ...rest}: CardProps) =>{
+    
     return(
         <FigureContainer>
-            <img src={imgURL} alt="" />
+            <figure>
+                <img src={imgURL} alt="" {...rest} />
+            </figure>            
         </FigureContainer>
     )
 }
