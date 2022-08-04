@@ -13,6 +13,8 @@ const Home  = () =>{
     const {setToken} = useIsLogged()
     const {listHandle, dogsList} = useDogs()
 
+    const [quntityImages, setQuantityImages] = useState<number>(60)
+    const [dogsListToRender, setDogsListToRender] = useState<string[]>([] as string[])
     const [imageSelected, setImageSelected] = useState<HTMLElement>()
     const [buttonSelected, setButtonSelected] = useState<string>("chihuahua")
 
@@ -24,9 +26,20 @@ const Home  = () =>{
         else{
             setToken(JSON.parse(token).token)
         }                     
-    })  
+    }, [])  
+
+    useEffect(()=>{
+
+        if(dogsList[0]){
+            const dogsListLength = dogsList.length
+            setDogsListToRender(dogsList.slice(0, quntityImages || dogsListLength))
+        }       
+                       
+    }, [dogsList, quntityImages])
 
     const handleClickButton = (breed: string) =>{
+        setQuantityImages(60)
+        setDogsListToRender([])
         setButtonSelected(breed)
         listHandle(breed)
     }
@@ -47,7 +60,7 @@ const Home  = () =>{
             setImageSelected(undefined)
         }                  
     }
-
+   
     return(
         <HomeContainer>
             <h1>Select a Breed</h1>
@@ -60,13 +73,14 @@ const Home  = () =>{
             </div>
 
             <div className="cardsList">
-                {dogsList[0] ?                 
-                dogsList.map((image, index) =>(
+                {dogsListToRender[0] ?                 
+                dogsListToRender.map((image, index) =>(
                     <Card key={index} imgURL={image} onClick={handleClickImage}/>
-                ))
+                ))                
                 :
                 <div className="loadingIcon"><CircularProgress/></div>
             }
+            {dogsListToRender[0] && <p className="loadMoreBtn"><button disabled={quntityImages >= dogsList.length ? true : false} onClick={() => setQuantityImages(quntityImages+60)} >Load More Images</button></p>}
             </div>
         </HomeContainer>
     )
