@@ -16,6 +16,7 @@ h1{
     padding: 20px;
     display: flex;
     align-items: center;
+    font-size: xxx-large;
 }
 
 `

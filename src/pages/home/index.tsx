@@ -42,6 +42,9 @@ const Home  = () =>{
         if(imageSelected !== elementTarget){
             elementTarget.id = "selected"
             setImageSelected(elementTarget)
+        }
+        else{
+            setImageSelected(undefined)
         }                  
     }
 
@@ -50,10 +53,10 @@ const Home  = () =>{
             <h1>Select a Breed</h1>
 
             <div className="breedSelectors">
-                <button disabled={buttonSelected === "chihuahua" ? true : false} onClick={() => handleClickButton("chihuahua")}>Chihuahua</button>
-                <button disabled={buttonSelected === "husky" ? true : false}  onClick={() => handleClickButton("husky")}>Husky</button>
-                <button disabled={buttonSelected === "labrador" ? true : false} onClick={() => handleClickButton("labrador")}>Labrador</button>
-                <button disabled={buttonSelected === "pug" ? true : false} onClick={() => handleClickButton("pug")}>Pug</button>
+                <button className="breedSelector" disabled={buttonSelected === "chihuahua" ? true : false} onClick={() => handleClickButton("chihuahua")}>Chihuahua</button>
+                <button className="breedSelector" disabled={buttonSelected === "husky" ? true : false}  onClick={() => handleClickButton("husky")}>Husky</button>
+                <button className="breedSelector" disabled={buttonSelected === "labrador" ? true : false} onClick={() => handleClickButton("labrador")}>Labrador</button>
+                <button className="breedSelector" disabled={buttonSelected === "pug" ? true : false} onClick={() => handleClickButton("pug")}>Pug</button>
             </div>
 
             <div className="cardsList">
