@@ -40,6 +40,7 @@ h1{
 
     :disabled{
         background-color: #d9e8ff;
+        cursor: auto;
     }
 }
 
@@ -60,6 +61,7 @@ h1{
 
         :disabled{
             background-color: #9e9e9e;
+            cursor: auto;
         }
     }    
 }
