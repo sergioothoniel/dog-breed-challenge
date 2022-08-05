@@ -27,7 +27,8 @@ const Home  = () =>{
         }
         else{
             setToken(JSON.parse(token).token)
-        }                     
+        }             
+       
     }, [])  
 
     useEffect(()=>{
