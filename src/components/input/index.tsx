@@ -1,8 +1,8 @@
 import { TextField } from "@mui/material"
-import { InputHTMLAttributes } from "react"
+import { HTMLAttributes } from "react"
 import { InputContainer } from "./style"
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
+interface InputProps extends HTMLAttributes<HTMLElement>{
     labelName: string
     inputType: string
     name: string
@@ -12,7 +12,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
 const Input = ({labelName, inputType, name, register, ...rest}: InputProps) =>{
     return(
         <InputContainer>            
-            <TextField id="outlined-basic" label="Email" variant="outlined" type={inputType} required {...rest} {...register(name)}/>            
+            <TextField id="outlined-basic" label={labelName} variant="outlined" type={inputType} required {...rest} {...register(name)}/>            
         </InputContainer>         
     )
 }
