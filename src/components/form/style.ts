@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const FormContainer = styled.form`
 width: 35vw;
+max-width: 400px;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -17,6 +18,10 @@ h1{
     display: flex;
     align-items: center;
     font-size: xxx-large;
+}
+
+@media (max-width: 800px){
+    width: 80%;
 }
 
 `

@@ -17,9 +17,9 @@ const DogsContext = createContext<DogsProviderData>({} as DogsProviderData)
 export const DogsProvider = ({children}: DogsProps) =>{
 
     const [breed, setBreed] = useState<string>("chihuahua")
-    const [dogsList, setDogsList] = useState<string[]>([])
+    const [dogsList, setDogsList] = useState<string[]>([] as string[])
 
-    const {token} = useIsLogged()
+    const {token, setToken} = useIsLogged()
 
     useEffect(()=>{
         if(token){
@@ -31,7 +31,10 @@ export const DogsProvider = ({children}: DogsProps) =>{
             .then(response => {
                 setDogsList(response.data.list)                
             })
-            .catch(error => {console.log(error)
+            .catch(error => {
+                console.log(error)
+                localStorage.clear() 
+                setToken("")               
             })
         }        
 

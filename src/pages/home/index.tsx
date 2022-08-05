@@ -19,13 +19,16 @@ const Home  = () =>{
     const [buttonSelected, setButtonSelected] = useState<string>("chihuahua")
 
     useEffect(()=>{
+
         const token = localStorage.getItem("@dogbreed/token")
+
         if(!token){
             history.push("/")
         }
         else{
             setToken(JSON.parse(token).token)
-        }                     
+        }             
+       
     }, [])  
 
     useEffect(()=>{
@@ -50,8 +53,7 @@ const Home  = () =>{
         }  
 
         const elementTarget = event.target.parentElement
-        console.log(elementTarget)
-
+                
         if(imageSelected !== elementTarget){
             elementTarget.id = "selected"
             setImageSelected(elementTarget)
@@ -66,10 +68,10 @@ const Home  = () =>{
             <h1>Select a Breed</h1>
 
             <div className="breedSelectors">
-                <button className="breedSelector" disabled={buttonSelected === "chihuahua" ? true : false} onClick={() => handleClickButton("chihuahua")}>Chihuahua</button>
-                <button className="breedSelector" disabled={buttonSelected === "husky" ? true : false}  onClick={() => handleClickButton("husky")}>Husky</button>
-                <button className="breedSelector" disabled={buttonSelected === "labrador" ? true : false} onClick={() => handleClickButton("labrador")}>Labrador</button>
-                <button className="breedSelector" disabled={buttonSelected === "pug" ? true : false} onClick={() => handleClickButton("pug")}>Pug</button>
+                <button disabled={buttonSelected === "chihuahua" ? true : false} onClick={() => handleClickButton("chihuahua")}>Chihuahua</button>
+                <button disabled={buttonSelected === "husky" ? true : false}  onClick={() => handleClickButton("husky")}>Husky</button>
+                <button disabled={buttonSelected === "labrador" ? true : false} onClick={() => handleClickButton("labrador")}>Labrador</button>
+                <button disabled={buttonSelected === "pug" ? true : false} onClick={() => handleClickButton("pug")}>Pug</button>
             </div>
 
             <div className="cardsList">
@@ -79,8 +81,9 @@ const Home  = () =>{
                 ))                
                 :
                 <div className="loadingIcon"><CircularProgress/></div>
-            }
-            {dogsListToRender[0] && <p className="loadMoreBtn"><button disabled={quntityImages >= dogsList.length ? true : false} onClick={() => setQuantityImages(quntityImages+60)} >Load More Images</button></p>}
+                }
+                
+                {dogsListToRender[0] && <p className="loadMoreBtn"><button disabled={quntityImages >= dogsList.length ? true : false} onClick={() => setQuantityImages(quntityImages+60)} >Load More Images</button></p>}
             </div>
         </HomeContainer>
     )
