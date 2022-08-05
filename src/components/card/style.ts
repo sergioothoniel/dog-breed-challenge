@@ -19,15 +19,15 @@ img{
 }
 
 #selected{
-    width: 50vw;
-    height: auto ;
+    width: auto;
+    height: 80vh ;
+    max-width: 90vw;
     box-shadow: 10px 5px 5px black;
     margin: 10px 15px 15px 10px;
 
     img{
         max-width: 100%;
-        max-height: 100%;        
-        height: auto;
+        height: 100%;     
     }
 }
 
