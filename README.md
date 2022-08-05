@@ -4,7 +4,7 @@
 
 ## 1. About
 
-This is a responsive website created as challenge to test development skills. It is an application that show a list of dogs images  according with breed as a response of a API request. Deloped in React TypeScript, using  Styled-Components, Material UI, React-Hook-Form, React-Router-Dom, ESLint and Jest (for tests).
+This is a responsive website created as challenge to test development skills. It is an application that show a list of dogs images  according with breed as a response of a API request. Deloped in React TypeScript, using  Styled-Components, Material UI, React-Hook-Form, React-Router-Dom, ContextAPI, ESLint and Jest (for tests).
 
 <br />
 
