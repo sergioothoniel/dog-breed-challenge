@@ -4,7 +4,6 @@ const GlobalStyle = createGlobalStyle`
 
 *{
     font-family: 'Dancing Script', cursive;
-
 }
 `
 

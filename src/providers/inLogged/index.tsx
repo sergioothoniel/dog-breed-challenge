@@ -26,7 +26,7 @@ export const IsLoggedProvider = ({children}: IsLoggedProps) =>{
     }, [])
 
     return(
-            <IsLoggedContext.Provider value={{ token, setToken}}>
+        <IsLoggedContext.Provider value={{ token, setToken}}>
             {children}
         </IsLoggedContext.Provider>
     )          
